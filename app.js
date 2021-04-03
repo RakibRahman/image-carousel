@@ -7,8 +7,10 @@ const prevbtn = document.querySelector(".prevBTN");
 const nextbtn = document.querySelector(".nextBTN");
 
 const dotsbtn = document.getElementById("dotBTN");
-const page = { slideList: [], dots: [], counter: 0 };
-//Image containers
+
+const page = { slideList: [], dots: [], counter: 0, delay: 7000, auto: {} }; //!slider contents
+
+//! Images container
 const imgBox = [
   {
     url: "https://picsum.photos/800/600?random=12",
@@ -42,45 +44,49 @@ const imgBox = [
   },
 ];
 
-imgBox.forEach((img, index, arr) => {
-  //! load images
-  let imgCard = document.createElement("div");
-  imgCard.classList.add("slide");
-  imgCard.classList.add("select");
+const startSetup = () => {
+  imgBox.forEach((img, index) => {
+    //! load images
+    let imgCard = document.createElement("div");
+    imgCard.classList.add("slide");
+    imgCard.classList.add("select");
 
-  let title = `<h3>${img.title}</h3>`;
-  let subText = `<p>${img.subText}</p>`;
-  let pic = `<img src="${img.url}" alt="demo pic" >`;
+    let title = `<h3>${img.title}</h3>`;
+    let subText = `<p>${img.subText}</p>`;
+    let pic = `<img src="${img.url}" alt="demo pic" >`;
 
-  imgCard.innerHTML = title + subText + pic;
+    imgCard.innerHTML = title + subText + pic;
 
-  page.slideList.push(imgCard);
+    page.slideList.push(imgCard);
 
-  slides.append(imgCard);
+    slides.append(imgCard);
 
-  //! create dots
-  let dotIcon = document.createElement("span");
-  dotIcon.classList.add("dot");
-  dotIcon.classList.add("select");
-  dotIcon.addEventListener("click", (e) => {
-    page.counter = index;
-    console.log("work");
-    showImages();
+    //! create dots
+    let dotIcon = document.createElement("span");
+    dotIcon.classList.add("dot");
+    dotIcon.classList.add("select");
+    dotIcon.addEventListener("click", (e) => {
+      page.counter = index;
+      console.log("work");
+      showImages();
+      restartInt();
+    });
+    dotsbtn.append(dotIcon);
+    page.dots.push(dotIcon);
   });
-  dotsbtn.append(dotIcon);
-  page.dots.push(dotIcon);
-});
-prevbtn.classList.add("select");
-nextbtn.classList.add("select");
-//! prev & next buttons
-prevbtn.addEventListener("click", (e) => {
-  page.counter--;
   showImages();
-});
-nextbtn.addEventListener("click", (e) => {
+  page.auto = setInterval(updateSlide, page.delay);
+};
+
+//! auto slide
+
+const updateSlide = () => {
   page.counter++;
   showImages();
-});
+};
+
+//! load startSetup when DOMContentLoaded is loaded
+window.addEventListener("DOMContentLoaded", startSetup);
 
 //! slide through images with buttons
 const showImages = () => {
@@ -95,5 +101,28 @@ const showImages = () => {
     item.style.display = "none";
   });
   page.slideList[page.counter].style.display = "block";
+
+  page.dots.forEach((item) => {
+    item.classList.remove("active");
+  });
+  page.dots[page.counter].classList.add("active");
 };
-window.addEventListener("DOMContentLoaded", showImages);
+const restartInt = () => {
+  clearInterval(page.auto);
+  page.auto = setInterval(updateSlide, page.delay);
+};
+//! prev & next buttons
+
+prevbtn.classList.add("select");
+nextbtn.classList.add("select");
+
+prevbtn.addEventListener("click", (e) => {
+  page.counter--;
+  showImages();
+  restartInt();
+});
+nextbtn.addEventListener("click", (e) => {
+  page.counter++;
+  showImages();
+  restartInt();
+});
