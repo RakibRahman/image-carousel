@@ -4,6 +4,95 @@
   box-sizing: border-box;
 }
 body {
-  text-align: center;
+  //   text-align: center;
   font-family: nunito;
+}
+#carousel {
+  border: 1px solid red;
+  position: relative;
+  max-width: 50rem;
+  overflow: hidden;
+  height: 50vh;
+  // margin: auto;
+  background-color: #e7e7e7;
+  & img {
+    width: 100%;
+    // height: 50vh;
+    object-fit: cover;
+  }
+
+  & .slide {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    display: none;
+
+    & h3 {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px 20px;
+    }
+
+    & p {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px 20px;
+    }
+  }
+
+  #controls {
+    width: 100%;
+    padding: 0 10px;
+    z-index: 100;
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.5;
+    & > * {
+      cursor: pointer;
+    }
+    & .con {
+      color: rebeccapurple;
+      width: 50px;
+      height: 50px;
+      border-radius: 100vh;
+      background-color: whitesmoke;
+    }
+  }
+  #dotBTN {
+    z-index: 200;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+
+    & .dot {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      margin: 0 10px;
+      border-radius: 100vh;
+      display: inline-block;
+      &:hover {
+        background: violet;
+      }
+    }
+  }
+  .select {
+    cursor: move;
+  }
 }

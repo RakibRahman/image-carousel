@@ -5,7 +5,100 @@
 }
 
 body {
-  text-align: center;
   font-family: nunito;
+}
+
+#carousel {
+  border: 1px solid red;
+  position: relative;
+  max-width: 50rem;
+  overflow: hidden;
+  height: 50vh;
+  background-color: #e7e7e7;
+}
+
+#carousel img {
+  width: 100%;
+  object-fit: cover;
+}
+
+#carousel .slide {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  display: none;
+}
+
+#carousel .slide h3 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 20px;
+}
+
+#carousel .slide p {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 20px;
+}
+
+#carousel #controls {
+  width: 100%;
+  padding: 0 10px;
+  z-index: 100;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.5;
+}
+
+#carousel #controls > * {
+  cursor: pointer;
+}
+
+#carousel #controls .con {
+  color: rebeccapurple;
+  width: 50px;
+  height: 50px;
+  border-radius: 100vh;
+  background-color: whitesmoke;
+}
+
+#carousel #dotBTN {
+  z-index: 200;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+
+#carousel #dotBTN .dot {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  margin: 0 10px;
+  border-radius: 100vh;
+  display: inline-block;
+}
+
+#carousel #dotBTN .dot:hover {
+  background: violet;
+}
+
+#carousel .select {
+  cursor: move;
 }
 /*# sourceMappingURL=style.css.map */
